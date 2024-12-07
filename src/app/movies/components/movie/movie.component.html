@@ -1,0 +1,12 @@
+<div class="rounded-md p-2 hover:bg-gray-200 hover:cursor-pointer relative">
+  <div
+    class="absolute right-4 top-4 bg-white px-1 rounded-md z-10 text-sm border border-gray-300"
+  >
+    <p>{{ voteAverage }}</p>
+  </div>
+  <div class="relative">
+    <img [src]="image" [alt]="movie().title" class="rounded-md" />
+  </div>
+  <p class="font-medium text-gray-800 pt-2">{{ movie().title }}</p>
+  <p class="text-xs text-gray-700 font-medium">{{ movieGenres }}</p>
+</div>

@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+
+import { MoviesComponent } from './movies/movies.component';
+import { SearchMoviesComponent } from './movies/components';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [MoviesComponent, SearchMoviesComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
-  title = 'moviees';
-}
+export class AppComponent {}
