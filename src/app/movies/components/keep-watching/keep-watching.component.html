@@ -1,6 +1,6 @@
 <div>
   <h2 class="font-semibold text-xl text-gray-700">Keep watching</h2>
-  <div class="grid grid-cols-6">
+  <div class="grid grid-cols-2 sm:grid-cols-6">
     @for (movie of movies().slice(0, 6); track movie.id) {
       <app-movie [movie]="movie" />
     }

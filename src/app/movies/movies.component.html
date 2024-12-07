@@ -7,7 +7,7 @@
       Most Popular
     </h2>
     <!-- Most popular movies grid -->
-    <div class="grid grid-cols-5">
+    <div class="grid grid-cols-2 sm:grid-cols-5">
       @for (movie of movies(); track movie.id) {
         <app-movie [movie]="movie" />
       }
