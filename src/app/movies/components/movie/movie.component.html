@@ -7,6 +7,10 @@
   <div class="relative">
     <img [src]="image" [alt]="movie().title" class="rounded-md" />
   </div>
-  <p class="font-medium text-gray-800 pt-2">{{ movie().title }}</p>
-  <p class="text-xs text-gray-700 font-medium">{{ movieGenres }}</p>
+  <p class="font-medium text-gray-800 pt-2 line-clamp-1 sm:line-clamp-none">
+    {{ movie().title }}
+  </p>
+  <p class="text-xs text-gray-700 font-medium line-clamp-1 sm:line-clamp-none">
+    {{ movieGenres }}
+  </p>
 </div>
