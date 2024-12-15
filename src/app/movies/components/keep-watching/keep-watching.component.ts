@@ -7,15 +7,14 @@ import {
   signal,
 } from '@angular/core';
 
-import { MovieComponent } from '../movie/movie.component';
-import { Movie } from '@app/movies/models';
-import { MoviesService } from '@app/movies/services';
+import { MovieComponent } from '@components/movie/movie.component';
+import { Movie } from '@models/movie.model';
+import { MoviesService } from '@services/movies.service';
 
 @Component({
   selector: 'app-keep-watching',
   imports: [MovieComponent],
   templateUrl: './keep-watching.component.html',
-  styleUrl: './keep-watching.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KeepWatchingComponent implements OnInit {
@@ -31,13 +30,8 @@ export class KeepWatchingComponent implements OnInit {
         this.movies.set(movies);
       });
 
-    const genresSubscription = this.moviesService
-      .getGenres()
-      .subscribe((genresData) => console.log(genresData.genres));
-
     this.destroyRef.onDestroy(() => {
       moviesSubscription.unsubscribe();
-      genresSubscription.unsubscribe();
     });
   }
 }

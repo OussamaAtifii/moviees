@@ -1,13 +1,29 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 
+import { MovieModalComponent } from './shared/modal/movie-modal/movie-modal.component';
+import { MoviesService } from './movies/services/movies.service';
+import { SearchMoviesComponent } from './movies/components/search-movies/search-movies.component';
 import { MoviesComponent } from './movies/movies.component';
-import { SearchMoviesComponent } from './movies/components';
 
 @Component({
   selector: 'app-root',
-  imports: [MoviesComponent, SearchMoviesComponent],
+  imports: [MoviesComponent, SearchMoviesComponent, MovieModalComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {}
+export class AppComponent implements OnInit {
+  private movieService = inject(MoviesService);
+  selectedMovie = this.movieService.selectedMovie;
+
+  ngOnInit(): void {
+    this.movieService.getGenres().subscribe({
+      next: () => console.log('Genres generated'),
+      error: (error) => console.log('Error generating genres: ', error),
+    });
+  }
+}
