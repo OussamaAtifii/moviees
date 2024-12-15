@@ -3,23 +3,24 @@ import {
   Component,
   inject,
   input,
-  OnInit,
 } from '@angular/core';
-
-import { formatVoteAverage, getMovieGenres } from '@app/shared/utils/helpers';
-import { Movie } from '@models/movie.model';
-import { MoviesService } from '@services/movies.service';
+import { Movie } from '../../models/movie.model';
+import { MoviesService } from '../../services/movies.service';
+import {
+  formatVoteAverage,
+  getMovieGenres,
+} from '../../../shared/utils/helpers';
 
 @Component({
   selector: 'app-movie',
   imports: [],
   templateUrl: './movie.component.html',
+  styleUrl: './movie.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MovieComponent implements OnInit {
+export class MovieComponent {
   private moviesService = inject(MoviesService);
   movie = input.required<Movie>();
-  movieGenresList: string = '';
 
   get image() {
     return `https://image.tmdb.org/t/p/w400${this.movie().backdrop_path}`;
@@ -29,21 +30,10 @@ export class MovieComponent implements OnInit {
     return formatVoteAverage(this.movie().vote_average);
   }
 
-  movieGenres() {
-    console.log(this.movie().genre_ids);
-
+  get movieGenres() {
     return getMovieGenres(
       this.movie().genre_ids,
       this.moviesService.allGenres(),
     );
-  }
-
-  onSelectMovie() {
-    this.moviesService.setSelectedMovie(this.movie());
-  }
-
-  ngOnInit(): void {
-    console.log('MOVIE RENDERIZADA');
-    this.movieGenresList = this.movieGenres();
   }
 }

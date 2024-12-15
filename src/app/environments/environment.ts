@@ -1,3 +1,3 @@
 export const environment = {
-    TMDB_TOKEN: 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YTRmOWNmMjVjOTUwNzZlMDIxNWYwZjU1OTVhOGQwZCIsIm5iZiI6MTY5NzcxMjA3OC4yMzIsInN1YiI6IjY1MzEwN2NlNTFhNjRlMDBjOGZkZDU3MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.dtnk9cwJ_7ePh_HZnrBjdTpuTVN9xdbutq7loWkYSSw',
+  TMDB_TOKEN: '',
 };
