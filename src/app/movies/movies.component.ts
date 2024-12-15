@@ -6,16 +6,15 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-
-import { KeepWatchingComponent, MovieComponent } from './components';
-import { Movie } from './models';
-import { MoviesService } from './services';
+import { MovieComponent } from '@components/movie/movie.component';
+import { KeepWatchingComponent } from '@components/keep-watching/keep-watching.component';
+import { MoviesService } from '@services/movies.service';
+import { Movie } from '@models/movie.model';
 
 @Component({
   selector: 'app-movies',
   imports: [KeepWatchingComponent, MovieComponent],
   templateUrl: './movies.component.html',
-  styleUrl: './movies.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MoviesComponent implements OnInit {
@@ -28,7 +27,11 @@ export class MoviesComponent implements OnInit {
     // Fetch most popular movies
     const subscription = this.moviesService
       .getMostPopularMovies()
-      .subscribe((movies) => this.movies.set(movies));
+      .subscribe((movies) => {
+        console.log(movies);
+
+        this.movies.set(movies);
+      });
 
     // Unsubscribe when component is destroyed
     this.destroyRef.onDestroy(() => {

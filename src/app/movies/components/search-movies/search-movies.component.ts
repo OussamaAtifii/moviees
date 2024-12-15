@@ -6,18 +6,18 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { debounceTime, distinctUntilChanged, Subject, switchMap } from 'rxjs';
-import { FormsModule } from '@angular/forms';
 
-import { MoviesService } from '@app/movies/services';
-import { formatVoteAverage } from '@app/shared/utils';
-import { Movie } from '@app/movies/models';
+import { FormsModule } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, Subject, switchMap } from 'rxjs';
+
+import { formatVoteAverage } from '@app/shared/utils/helpers';
+import { Movie } from '@models/movie.model';
+import { MoviesService } from '@services/movies.service';
 
 @Component({
   selector: 'app-search-movies',
   imports: [FormsModule],
   templateUrl: './search-movies.component.html',
-  styleUrl: './search-movies.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchMoviesComponent implements OnInit {

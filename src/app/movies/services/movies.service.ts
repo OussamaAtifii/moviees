@@ -1,9 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 
-import { Genre, GenresData } from '../models/genre.model';
-import { Movie, MoviesData } from '../models/movie.model';
+import { getMovieGenres } from '@app/shared/utils/helpers';
+import { Movie, MoviesData } from '@models/movie.model';
+import { Genre, GenresData } from '@models/genre.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,9 @@ export class MoviesService {
   // Read-only signal exposing the list of genres
   allGenres = this.genres.asReadonly();
 
+  private _selectedMovie = signal<Movie | null>(null);
+  selectedMovie = this._selectedMovie.asReadonly();
+
   /**
    * Fetch "now playing" movies.
    *
@@ -26,7 +30,7 @@ export class MoviesService {
   getKeepWatchingMovies(): Observable<Movie[]> {
     return this.httpClient
       .get<MoviesData>(`${this.baseUrl}/movie/now_playing`)
-      .pipe(map((moviesData) => moviesData.results));
+      .pipe(map((moviesData) => this.filterMovies(moviesData.results)));
   }
 
   /**
@@ -36,7 +40,7 @@ export class MoviesService {
   getMostPopularMovies(): Observable<Movie[]> {
     return this.httpClient
       .get<MoviesData>(`${this.baseUrl}/movie/popular`)
-      .pipe(map((moviesData) => moviesData.results));
+      .pipe(map((moviesData) => this.filterMovies(moviesData.results)));
   }
 
   /**
@@ -60,12 +64,26 @@ export class MoviesService {
   searchMovie(query: string): Observable<Movie[]> {
     return this.httpClient
       .get<MoviesData>(`${this.baseUrl}/search/movie?query=${query}`)
-      .pipe(
-        map((moviesData) =>
-          moviesData.results.filter(
-            (movie) => movie.vote_average > 0 && movie.backdrop_path !== null,
-          ),
-        ),
-      );
+      .pipe(map((moviesData) => this.filterMovies(moviesData.results)));
+  }
+
+  // Filter movies with a vote average greater than 0 and a backdrop path
+  filterMovies(movies: Movie[]) {
+    return movies
+      .filter((movie) => movie.vote_average > 0 && movie.backdrop_path !== null)
+      .map((movie) => ({
+        ...movie,
+        genres: getMovieGenres(movie.genre_ids, this.genres()),
+      }));
+  }
+
+  // Set selected movie to show it in the modal
+  setSelectedMovie(movie: Movie | null) {
+    this._selectedMovie.set(movie);
+  }
+
+  // Remove the movie when the modal get closed
+  removeSelectedMovie() {
+    this._selectedMovie.set(null);
   }
 }
