@@ -9,6 +9,16 @@
   </div>
   <div class="relative">
     <img [src]="image" [alt]="movie().title" class="rounded-md" />
+    @if (progressBar()) {
+      <div
+        class="w-[95%] bg-black rounded-full h-1.5 mx-auto absolute bottom-1 left-0 right-0"
+      >
+        <div
+          class="bg-white h-full rounded-full"
+          [style.width]="movie().watchPercentage + '%'"
+        ></div>
+      </div>
+    }
   </div>
   <p class="font-medium text-gray-800 pt-2 line-clamp-1 sm:line-clamp-none">
     {{ movie().title }}

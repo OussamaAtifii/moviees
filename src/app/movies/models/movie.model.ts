@@ -21,4 +21,5 @@ export interface Movie {
   vote_average: number;
   vote_count: number;
   genres: string | null;
+  watchPercentage: number | null;
 }

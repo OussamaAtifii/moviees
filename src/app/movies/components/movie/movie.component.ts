@@ -21,6 +21,12 @@ export class MovieComponent implements OnInit {
   movie = input.required<Movie>();
   movieGenresList: string = '';
 
+  progressBar = input<boolean>(false);
+
+  ngOnInit(): void {
+    this.movieGenresList = this.movieGenres();
+  }
+
   get image() {
     return `https://image.tmdb.org/t/p/w400${this.movie().backdrop_path}`;
   }
@@ -30,8 +36,6 @@ export class MovieComponent implements OnInit {
   }
 
   movieGenres() {
-    console.log(this.movie().genre_ids);
-
     return getMovieGenres(
       this.movie().genre_ids,
       this.moviesService.allGenres(),
@@ -40,10 +44,5 @@ export class MovieComponent implements OnInit {
 
   onSelectMovie() {
     this.moviesService.setSelectedMovie(this.movie());
-  }
-
-  ngOnInit(): void {
-    console.log('MOVIE RENDERIZADA');
-    this.movieGenresList = this.movieGenres();
   }
 }

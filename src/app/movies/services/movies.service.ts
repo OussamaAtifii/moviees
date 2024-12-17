@@ -2,7 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
 
-import { getMovieGenres } from '@app/shared/utils/helpers';
+import {
+  addProgressBarPercentage,
+  getMovieGenres,
+} from '@app/shared/utils/helpers';
 import { Movie, MoviesData } from '@models/movie.model';
 import { Genre, GenresData } from '@models/genre.model';
 
@@ -30,7 +33,11 @@ export class MoviesService {
   getKeepWatchingMovies(): Observable<Movie[]> {
     return this.httpClient
       .get<MoviesData>(`${this.baseUrl}/movie/now_playing`)
-      .pipe(map((moviesData) => this.filterMovies(moviesData.results)));
+      .pipe(
+        map((moviesData) =>
+          addProgressBarPercentage(this.filterMovies(moviesData.results)),
+        ),
+      );
   }
 
   /**

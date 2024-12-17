@@ -1,3 +1,4 @@
+import { Movie } from '@app/movies/models/movie.model';
 import { Genre } from '../../movies/models/genre.model';
 
 /**
@@ -37,4 +38,17 @@ export function getMovieGenres(genresId: number[], genres: Genre[]): string {
  */
 export function formatVoteAverage(voteAverage: number): string {
   return voteAverage.toFixed(1);
+}
+
+function getRandomPorcentage() {
+  return Math.floor(Math.random() * 100);
+}
+
+export function addProgressBarPercentage(movies: Movie[]) {
+  const updatedMovies = movies.map((movie) => ({
+    ...movie,
+    watchPercentage: getRandomPorcentage(),
+  }));
+
+  return updatedMovies;
 }
