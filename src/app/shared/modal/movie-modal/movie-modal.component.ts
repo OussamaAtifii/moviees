@@ -24,8 +24,6 @@ export class MovieModalComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('Se elimina modal movie');
-
     this.movieService.removeSelectedMovie();
   }
 }

@@ -39,7 +39,6 @@ export class SearchMoviesComponent implements OnInit {
       )
       .subscribe({
         next: (movies) => {
-          console.log(movies);
           this.foundMovies.set(movies);
           this.loading.set(false);
         },

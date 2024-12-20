@@ -28,8 +28,6 @@ export class MoviesComponent implements OnInit {
     const subscription = this.moviesService
       .getMostPopularMovies()
       .subscribe((movies) => {
-        console.log(movies);
-
         this.movies.set(movies);
       });
 
