@@ -1,5 +1,5 @@
 <div
-  class="rounded-md p-2 hover:bg-gray-200 hover:cursor-pointer relative"
+  class="rounded-md p-2 hover:bg-gray-200 hover:cursor-pointer relative group"
   (click)="onSelectMovie()"
 >
   <div
@@ -8,7 +8,13 @@
     <p>{{ voteAverage }}</p>
   </div>
   <div class="relative">
-    <img [src]="image" [alt]="movie().title" class="rounded-md" />
+    <div class="overflow-hidden rounded-md">
+      <img
+        [src]="image"
+        [alt]="movie().title"
+        class="rounded-md group-hover:scale-110 transition"
+      />
+    </div>
     @if (progressBar()) {
       <div
         class="w-[95%] bg-black rounded-full h-1.5 mx-auto absolute bottom-1 left-0 right-0"
