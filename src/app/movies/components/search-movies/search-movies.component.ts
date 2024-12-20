@@ -28,6 +28,7 @@ export class SearchMoviesComponent implements OnInit {
   foundMovies = signal<Movie[]>([]);
   query = signal('');
   querySubject = new Subject<string>();
+  isInputFocused = signal(false);
 
   ngOnInit(): void {
     const subscription = this.querySubject
@@ -58,6 +59,16 @@ export class SearchMoviesComponent implements OnInit {
     }
 
     this.querySubject.next(this.query());
+  }
+
+  onFocus() {
+    this.isInputFocused.set(true);
+  }
+
+  onBlur() {
+    setTimeout(() => {
+      this.isInputFocused.set(false);
+    }, 100);
   }
 
   getMovieImage(image: string): string {
