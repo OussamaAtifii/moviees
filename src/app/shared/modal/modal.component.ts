@@ -11,8 +11,9 @@ import { MoviesService } from '@app/movies/services/movies.service';
   selector: 'app-modal',
   imports: [],
   templateUrl: './modal.component.html',
+  styleUrl: './modal.component.css',
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent {
   private movieService = inject(MoviesService);
 
   private dialogEl =
@@ -24,9 +25,5 @@ export class ModalComponent implements OnInit {
 
   onDialogCancel() {
     this.movieService.removeSelectedMovie();
-  }
-
-  ngOnInit(): void {
-    console.log('MODAL RENDERIZADA');
   }
 }
