@@ -35,7 +35,9 @@ export class MoviesService {
       .get<MoviesData>(`${this.baseUrl}/movie/now_playing`)
       .pipe(
         map((moviesData) =>
-          addProgressBarPercentage(this.filterMovies(moviesData.results)),
+          addProgressBarPercentage(
+            this.filterMovies(moviesData.results.splice(0, 6)),
+          ),
         ),
       );
   }
