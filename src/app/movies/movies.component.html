@@ -1,16 +1,12 @@
-<div class="space-y-10">
-  <!-- Keep watching movies component -->
-  <app-keep-watching />
-
-  <div>
-    <h2 class="font-semibold text-xl text-gray-700 flex items-center gap-2">
-      Most Popular
-    </h2>
-    <!-- Most popular movies grid -->
-    <div class="grid grid-cols-2 sm:grid-cols-5">
-      @for (movie of movies(); track movie.id) {
-        <app-movie [movie]="movie" />
-      }
-    </div>
-  </div>
+<div class="flex flex-col gap-8">
+  <app-movies-container
+    title="Keep Watching"
+    [movies]="keepWatchingMovies()"
+    type="watching"
+  />
+  <app-movies-container
+    title="Most Popular"
+    [movies]="popularMovies()"
+    type="popular"
+  />
 </div>
