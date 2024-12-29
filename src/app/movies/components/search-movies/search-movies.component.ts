@@ -62,6 +62,7 @@ export class SearchMoviesComponent implements OnInit {
 
   onSelectMovie(movie: Movie) {
     this.moviesService.setSelectedMovie(movie);
+    this.query.set('');
   }
 
   onFocus() {
