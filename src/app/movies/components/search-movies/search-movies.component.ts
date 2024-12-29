@@ -60,6 +60,10 @@ export class SearchMoviesComponent implements OnInit {
     this.querySubject.next(this.query());
   }
 
+  onSelectMovie(movie: Movie) {
+    this.moviesService.setSelectedMovie(movie);
+  }
+
   onFocus() {
     this.isInputFocused.set(true);
   }
@@ -67,7 +71,7 @@ export class SearchMoviesComponent implements OnInit {
   onBlur() {
     setTimeout(() => {
       this.isInputFocused.set(false);
-    }, 100);
+    }, 200);
   }
 
   getMovieImage(image: string): string {
