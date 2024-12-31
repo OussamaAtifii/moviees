@@ -3,18 +3,20 @@
 }
 
 <main>
-  <header
-    class="flex justify-between items-center sticky top-0 px-3 py-6 sm:p-6 z-50 bg-white border-b-2 border-gray-200"
-  >
-    <div class="flex items-center sm:space-x-2">
-      <img src="logo.svg" alt="" class="hidden sm:block size-10" />
-      <h1 class="text-xl sm:text-4xl font-bold text-gray-900">Moviees</h1>
+  @if (!loading()) {
+    <header
+      class="flex justify-between items-center sticky top-0 px-3 py-6 sm:p-6 z-50 bg-white border-b-2 border-gray-200"
+    >
+      <div class="flex items-center sm:space-x-2">
+        <img src="logo.svg" alt="" class="hidden sm:block size-10" />
+        <h1 class="text-xl sm:text-4xl font-bold text-gray-900">Moviees</h1>
+      </div>
+      <div>
+        <app-search-movies />
+      </div>
+    </header>
+    <div class="p-3 sm:px-6 sm:py-4 pt-8">
+      <app-movies />
     </div>
-    <div>
-      <app-search-movies />
-    </div>
-  </header>
-  <div class="p-3 sm:px-6 sm:py-4 pt-8">
-    <app-movies />
-  </div>
+  }
 </main>

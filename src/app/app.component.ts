@@ -3,6 +3,7 @@ import {
   Component,
   inject,
   OnInit,
+  signal,
 } from '@angular/core';
 
 import { MovieModalComponent } from './shared/modal/movie-modal/movie-modal.component';
@@ -19,11 +20,13 @@ import { MoviesComponent } from './movies/movies.component';
 export class AppComponent implements OnInit {
   private movieService = inject(MoviesService);
   selectedMovie = this.movieService.selectedMovie;
+  loading = signal(true);
 
   ngOnInit(): void {
     this.movieService.getGenres().subscribe({
       next: () => console.log('Genres generated'),
       error: (error) => console.log('Error generating genres: ', error),
+      complete: () => this.loading.set(false),
     });
   }
 }
